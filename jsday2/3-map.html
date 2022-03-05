@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ul-wrapper"></div>
+    <form>
+        <input type="text" id="name-input">
+        <button id="append-btn">Append</button>
+        <button id="rm-first-btn">Remove first</button>
+        <button id="rm-last-btn">Remove last</button>
+
+    </form>
+    <script>
+        // a) Yesterday you used the array types map and join methods to create a UL with a number of names. 
+        //    Use this function+DOM manipulation to insert the UL somewhere in an HTML page.
+        let names=["Lars", "Jan", "Peter", "Bo", "Frederik"]
+        const showList = ()=>{
+        let ul = '<ul>'+names.map(name=>`<li>${name}</li>`).join('')+'</ul>'
+        document.getElementById("ul-wrapper").innerHTML = ul
+        }
+        showList()
+        // b) Create a FORM with an input field + a submit button as sketched here.
+        // Write the necessary code to add the new name to the array of names, and regenerate the <ul> with the updated list.
+        document.getElementById('append-btn').onclick = event=>{
+            event.preventDefault()
+            let name = document.getElementById('name-input').value
+            names.push(name)
+            console.log(name+" appended")
+            showList()
+        }
+        // c) Add two more buttons to the form with the text:  “remove first” and  “remove last”. Implement the behaviour inspired by how you solved part-b.
+        document.getElementById('rm-first-btn').onclick = e=>{
+            e.preventDefault()
+            console.log(names.shift()+" deleted")
+            showList()
+        }
+        document.getElementById('rm-last-btn').onclick = e=>{
+            e.preventDefault()
+            console.log(names.pop()+" deleted")
+            showList()
+        }
+    </script>
+</body>
+</html>

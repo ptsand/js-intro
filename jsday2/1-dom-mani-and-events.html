@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM manipulation and events</title>
+    <style>
+        #container {
+            padding: 2em;
+            margin: 5em;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #container > div {
+            border: 1px solid red;
+            border-radius: 5px;
+            margin: 1em;
+            padding: 1em;
+        }
+        #btn1 {
+            padding: 0.5em;
+        }
+        </style>
+</head>
+<body>
+    <div id="container">
+    <div id="div1">I am div1</div>
+    <div id="div2">I am div2</div>
+    <div id="div3">I am div3</div>
+    <button id="btn1">Change colors</button>
+    </div>
+    <script>
+        // a) When the page initially is loaded all divs should be given a colour of your choice
+        let allDivs = document.querySelectorAll("#container > div")
+        allDivs.forEach(e=>e.style.backgroundColor="blue")
+        // b) Add a button, and assign a click handler to the button. When the button is clicked each div should be given a unique colour.
+        let colors = ['yellow','red','green']
+        document.getElementById("btn1").onclick = ()=>allDivs.forEach((e,index)=>e.style.backgroundColor=colors[index])
+    </script>
+</body>
+</html>

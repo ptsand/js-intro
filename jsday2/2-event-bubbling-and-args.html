@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event bubbling and arguments</title>
+    <style>
+        #outer {
+            display: flex;
+            padding: 2em;
+            margin: 0 2em;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #outer > div {
+            flex: auto;
+            border: 1px solid red;
+            border-radius: 5px;
+            margin: 1em;
+            padding: 0.5em;
+        }
+        #output {
+            text-align: center;
+        }
+        </style>
+</head>
+<body>
+    <p id="output"></p>
+    <div id="outer">
+        <div id="div1">div1</div>
+        <div id="div2">div2</div>
+        <div id="div3">div3</div>
+        <div id="div4">div4</div>
+        <div id="div5">div5</div>
+        <div id="div6">div6</div>
+        <div id="div7">div7</div>
+        <div id="div8">div8</div>
+        <div id="div9">div9</div>
+        <div id="div10">div10</div>
+        <div id="div11">div11</div>
+        <div id="div12">div12</div>
+    </div>
+    <script>
+        // a) Add a click handler to each id and write code, so when clicked, each div will write to the console "Hi from idOfTheDiv".
+        let allDivs = document.querySelectorAll("#outer > div")
+        let outputP = document.getElementById("output")
+        // allDivs.forEach(e=>e.onclick=()=> outputP.innerText = e.id) // add eventhandlers for each div
+        // b) Now, using cut and paste, add 10 more divs (still each with a unique id)
+        document.getElementById("outer").onclick = event=>outputP.innerText = "You clicked on "+event.target.id // use event bubbling instead
+        // c) Add an empty paragraph tag, with an id, to your HTML and change the code for both exercises above, so that output is not written to the console, but into this paragraph.
+
+    </script>
+</body>
+</html>
