@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Fetch user[s] from REST endpoint</title>
+</head>
+<body>
+    <div class="container w-50 mt-3">
+        <div class="input-group mb-3">
+            <input id="user-id" type="text" class="form-control" placeholder="User ID" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button id="fetch-btn" class="btn btn-outline-secondary" type="button" id="button-addon2">Get User</button>
+            <button id="fetch-all-btn" class="btn btn-outline-secondary" type="button" id="button-addon2">Get All</button>
+          </div>
+        <div class="card">
+            <div class="card-body" id="user-info">
+            </div>
+        </div>
+    </div>
+    <script>
+    const fetchUser = ()=>{
+    fetch(`https://jsonplaceholder.typicode.com/users/${document.getElementById("user-id").value}`)
+    .then(response => response.json())
+    .then(user => {
+        let userHtml = `<p>Name: ${user.name}<br>Phone: ${user.phone}</p><p><span class="fw-bold">Address</span><br>
+            Street: ${user.address.street}<br>City: ${user.address.city}<br>Zip: ${user.address.zipcode}<br>
+            Geo (lat,lng): ${user.address.geo.lat}, ${user.address.geo.lng}</p>`
+        document.getElementById("user-info").innerHTML = userHtml
+    }).catch(msg=>console.log(msg))
+    }
+    const fetchAll = ()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => {
+        let outputHtml = '<table class="table"><thead><tr><th scope="col">Name</th><th scope="col">Phone</th></tr></thead><tbody>'
+        users.forEach(user => {
+            outputHtml += `<tr><td>${user.name}</td><td>${user.phone}</td>`
+        });
+        outputHtml += '</tbody></table>'
+        document.getElementById("user-info").innerHTML = outputHtml
+    }).catch(msg=>console.log(msg))
+    }
+    document.getElementById("fetch-btn").onclick = fetchUser
+    document.getElementById("fetch-all-btn").onclick = fetchAll
+    </script>
+</body>
+</html>
